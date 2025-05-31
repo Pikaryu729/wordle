@@ -20,7 +20,7 @@ class Game:
     @classmethod
     def load_words(self, words_file: str) -> list[str]:
         with open(words_file, "r") as file:
-            words = file.readlines()
+            words = [line.strip() for line in file]
         return words
 
     def get_random_word(self):
