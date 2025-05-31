@@ -1,4 +1,4 @@
-from game.game import Wordle
+from wordle.wordle import Wordle
 import pytest
 
 

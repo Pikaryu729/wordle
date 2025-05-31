@@ -1,4 +1,4 @@
-from game import Wordle
+from wordle import Wordle
 
 
 def main():
