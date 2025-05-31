@@ -34,9 +34,15 @@ class Wordle:
         return True
 
     def check_guess(self, word: str) -> list[int]:
-        """output list of numbers, 0 means character is not in word, 1 means character is in word, but at wrong possition, 2 means character is in word, at right position"""
+        """
+        output list of numbers where:
+        0 - character is not in word.
+        1 - character is in word but at wrong possition.
+        2 - character is in word, at right position
+        """
         word_counts = {}
-        out = [0] * 5
+        out = [0] * len(self.secret_word)
+
         for char in self.secret_word:
             word_counts[char] = word_counts.get(char, 0) + 1
 
@@ -46,7 +52,7 @@ class Wordle:
                 out[i] = 2
 
         for i, char in enumerate(word):
-            if char in self.secret_word and word_counts[char] > 0:
+            if out[i] != 2 and char in self.secret_word and word_counts[char] > 0:
                 word_counts[char] -= 1
                 out[i] = 1
 
@@ -79,15 +85,18 @@ class Wordle:
         for guess in self.prev_guesses:
             self.print_guess(guess)
 
-
     def run(self):
-        while self.num_guesses <= self.max_guesses and not self.has_won:
+        while self.num_guesses <= self.max_guesses:
             self.print_prev_guesses()
             guess = self.get_guess()
             if guess == self.secret_word:
                 self.has_won = True
+                break
             self.print_guess(guess)
+        self.game_over()
+
+    def game_over(self):
         if self.has_won:
             print(f"You guess the word! {self.secret_word.upper()}")
         else:
-            print(f"The Word was: {self.secret_word}. Better luck next time!")
+            print(f"The word was: {self.secret_word}. Better luck next time!")

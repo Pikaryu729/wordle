@@ -9,7 +9,7 @@ def wordle():
 
 def test_get_secret_word(wordle):
     word = wordle.secret_word
-    assert word == "shalt"
+    assert word == "quipu"
 
 
 def test_validate_guess(wordle):
@@ -19,6 +19,8 @@ def test_validate_guess(wordle):
 
 
 def test_guesses(wordle):
-    assert wordle.secret_word == "shalt"
-    assert wordle.check_guess("thank") == [1, 2, 2, 0, 0]
-    assert wordle.check_guess("again") == [0, 0, 2, 0, 0]
+    assert wordle.secret_word == "quipu"
+    assert wordle.check_guess("thank") == [0, 0, 0, 0, 0]
+    assert wordle.check_guess("again") == [0, 0, 0, 1, 0]
+    assert wordle.check_guess("guess") == [0, 2, 0, 0 ,0]
+    assert wordle.check_guess("quips") == [2, 2, 2, 2, 0]
