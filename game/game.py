@@ -86,7 +86,7 @@ class Wordle:
             self.print_guess(guess)
 
     def run(self):
-        while self.num_guesses <= self.max_guesses:
+        while self.num_guesses < self.max_guesses:
             self.print_prev_guesses()
             guess = self.get_guess()
             if guess == self.secret_word:
