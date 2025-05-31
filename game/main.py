@@ -1,10 +1,10 @@
-from game.game import Game
+from game import Wordle
 
 
 def main():
-    game = Game()
-    word = game.get_random_word()
-    print(word)
+    wordle = Wordle()
+    wordle.run()
+
 
 if __name__ == "__main__":
     main()
