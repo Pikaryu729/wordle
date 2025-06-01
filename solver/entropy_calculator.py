@@ -6,6 +6,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 def check_guess(guess: str, answer: str) -> tuple[int]:
     """
     output list of numbers where:
@@ -31,6 +32,7 @@ def check_guess(guess: str, answer: str) -> tuple[int]:
 
     return tuple(out)
 
+
 def get_guess_entropy(guess: str, allowed_words: list[str]) -> float:
     if not allowed_words:
         return 0.0
@@ -38,7 +40,7 @@ def get_guess_entropy(guess: str, allowed_words: list[str]) -> float:
     pattern_counts = defaultdict(int)
     for word in allowed_words:
         pattern = check_guess(guess, word)
-        pattern_counts[pattern] += 1 
+        pattern_counts[pattern] += 1
 
     entropy = 0.0
     total_words = len(allowed_words)
@@ -47,14 +49,20 @@ def get_guess_entropy(guess: str, allowed_words: list[str]) -> float:
         if count > 0:  # Avoid log(0)
             probability = count / total_words
             entropy -= probability * math.log2(probability)
-    
+
     return entropy
 
-def get_new_word_list(guess: str, allowed_words: list[str], secret_word: str) -> list[str]:
+
+def get_new_word_list(
+    guess: str, allowed_words: list[str], secret_word: str
+) -> list[str]:
     letter_statuses = check_guess(guess, secret_word)
     return filter_words_by_response(guess, letter_statuses, allowed_words)
 
-def filter_words_by_response(guess: str, response: tuple, word_list: list[str]) -> list[str]:
+
+def filter_words_by_response(
+    guess: str, response: tuple, word_list: list[str]
+) -> list[str]:
     """
     Filter word list to only include words that would give the specified response to the guess.
     Useful for updating the possible word list after each guess.
@@ -69,7 +77,9 @@ if __name__ == "__main__":
     word_list = wordle.allowed_words
     while guess != wordle.secret_word:
         word_list = get_new_word_list(guess, word_list, wordle.secret_word)
-        entropy_table = {guess:get_guess_entropy(guess, word_list) for guess in word_list }
+        entropy_table = {
+            guess: get_guess_entropy(guess, word_list) for guess in word_list
+        }
         guess = max(entropy_table, key=entropy_table.get)
         total_num_guesses += 1
     print(guess)
