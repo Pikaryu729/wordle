@@ -9,7 +9,7 @@ class Wordle:
         self.num_guesses = 0
         self.max_guesses = 6
         self.console = Console()
-        self.words = self.load_words(words_file)
+        self.allowed_words = self.load_words(words_file)
         if seed:
             self.generator = random.Random(seed)
         else:
@@ -25,15 +25,15 @@ class Wordle:
 
     def get_random_word(self):
         """Gets random word from list of words"""
-        return self.generator.choice(self.words)
+        return self.generator.choice(self.allowed_words)
 
     def is_valid_guess(self, word: str) -> bool:
         """returns True if valid guess, else false"""
-        if word not in self.words:
+        if word not in self.allowed_words:
             return False
         return True
 
-    def check_guess(self, word: str) -> list[int]:
+    def check_guess(self, word: str) -> tuple[int]:
         """
         output list of numbers where:
         0 - character is not in word.
@@ -56,7 +56,7 @@ class Wordle:
                 word_counts[char] -= 1
                 out[i] = 1
 
-        return out
+        return tuple(out)
 
     def get_guess(self) -> str:
         while True:

@@ -64,13 +64,12 @@ def filter_words_by_response(guess: str, response: tuple, word_list: list[str]) 
 
 if __name__ == "__main__":
     total_num_guesses = 0
-    for i in range(100):
-        wordle = Wordle()
-        guess = "tares"
-        word_list = wordle.words
-        while guess != wordle.secret_word:
-            word_list = get_new_word_list(guess, word_list, wordle.secret_word)
-            entropy_table = {guess:get_guess_entropy(guess, word_list) for guess in word_list }
-            guess = max(entropy_table, key=entropy_table.get)
-            total_num_guesses += 1
-    print(total_num_guesses / 100)
+    wordle = Wordle(seed=123)
+    guess = "tares"
+    word_list = wordle.allowed_words
+    while guess != wordle.secret_word:
+        word_list = get_new_word_list(guess, word_list, wordle.secret_word)
+        entropy_table = {guess:get_guess_entropy(guess, word_list) for guess in word_list }
+        guess = max(entropy_table, key=entropy_table.get)
+        total_num_guesses += 1
+    print(guess)
