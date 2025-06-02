@@ -1,15 +1,13 @@
 # 🧠 Wordle Solver
 
-A smart and efficient solver for the popular word puzzle game **Wordle**. This project uses logic, probability, and dictionary lookups to find the optimal guess for each round.
+A smart and efficient solver for the popular word puzzle game **Wordle**. This project uses logic and probability to find the optimal guess for each round.
 
 ---
 
 ## 🎯 Features
 
 - ✅ Solves standard 5-letter Wordle puzzles
-- 📚 Dictionary-based word filtering
 - 📈 Smart scoring/heuristics to select optimal guesses
-- 🔁 Supports multiple solving strategies
 - 🧪 Easy to test and extend
 
 ---
