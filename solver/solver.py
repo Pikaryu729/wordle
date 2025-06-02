@@ -109,12 +109,18 @@ class Solver:
     def user_solve(self):
         guess = "tares"  # starting guess
         letter_statuses = None
-        while letter_statuses != (2, 2, 2, 2, 2):
-            self.console.print(f"Best Guess: {guess}")
+        guess_num = 1
+        for i in range(self.wordle.max_guesses):
+            self.console.print(f"Guess Number {guess_num}")
+            self.console.print(f"Starting Guess: {guess}" if guess_num == 1 else f"Best Guess: {guess}")
             letter_statuses = self.get_valid_input()
+            if letter_statuses == (2, 2, 2, 2, 2):
+                break
             self.allowed_words = self.get_new_word_list(guess, letter_statuses)
             guess = self.get_best_guess()
-        print(guess)
+
+            guess_num += 1
+        print(f"Found Answer: {guess} in {guess_num} tries")
 
     def solve(self) -> str:
         """Solve the Wordle puzzle and return the solution"""
@@ -167,5 +173,4 @@ def simulate(num_runs: int):
 if __name__ == "__main__":
     wordle = Wordle(seed=123)
     solver = Solver(wordle)
-    print("starting...")
     solver.user_solve()
