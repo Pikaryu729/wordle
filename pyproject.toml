@@ -1,7 +1,7 @@
 [project]
-name = "wordle"
+name = "wordle-solver"
 version = "0.1.0"
-description = "Add your description here"
+description = "Program that solves wordle"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

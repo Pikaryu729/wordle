@@ -112,7 +112,9 @@ class Solver:
         guess_num = 1
         for i in range(self.wordle.max_guesses):
             self.console.print(f"Guess Number {guess_num}")
-            self.console.print(f"Starting Guess: {guess}" if guess_num == 1 else f"Best Guess: {guess}")
+            self.console.print(
+                f"Starting Guess: {guess}" if guess_num == 1 else f"Best Guess: {guess}"
+            )
             letter_statuses = self.get_valid_input()
             if letter_statuses == (2, 2, 2, 2, 2):
                 break
@@ -168,9 +170,3 @@ def simulate(num_runs: int):
 
     print(f"Average number of guesses: {round(total_guesses / num_runs, 2)}")
     print(f"Most guesses: {most_guesses}")
-
-
-if __name__ == "__main__":
-    wordle = Wordle(seed=123)
-    solver = Solver(wordle)
-    solver.user_solve()
