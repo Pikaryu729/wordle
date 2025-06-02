@@ -1,10 +1,5 @@
-from wordle.wordle import Wordle
 import pytest
-
-
-@pytest.fixture
-def wordle():
-    return Wordle(seed=12345)
+from wordle.wordle import Wordle
 
 
 def test_get_secret_word(wordle):
